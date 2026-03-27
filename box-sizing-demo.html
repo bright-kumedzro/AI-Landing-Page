@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box-Sizing Demo</title>
+    <style>
+        body {
+            padding: 40px;
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        .container {
+            margin-bottom: 50px;
+        }
+
+        /* Box WITHOUT box-sizing: border-box */
+        .content-box {
+            width: 300px;
+            padding: 20px;
+            border: 5px solid red;
+            background-color: lightblue;
+            margin-bottom: 10px;
+            /* box-sizing: content-box; (this is the default) */
+        }
+
+        /* Box WITH box-sizing: border-box */
+        .border-box {
+            width: 300px;
+            padding: 20px;
+            border: 5px solid green;
+            background-color: lightcoral;
+            box-sizing: border-box;
+        }
+
+        /* Visual guide - exactly 300px wide */
+        .ruler {
+            width: 300px;
+            height: 30px;
+            background-color: yellow;
+            border: 2px solid black;
+            margin-bottom: 20px;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+        }
+
+        .info {
+            background-color: #f0f0f0;
+            padding: 15px;
+            margin-top: 10px;
+            border-left: 4px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Box-Sizing: Visual Comparison</h1>
+    
+    <div class="ruler">← 300px Ruler →</div>
+
+    <div class="container">
+        <h2>WITHOUT box-sizing: border-box (Default)</h2>
+        <div class="content-box">
+            This box has width: 300px, padding: 20px, border: 5px
+        </div>
+        <div class="info">
+            <strong>Actual total width:</strong> 350px<br>
+            Calculation: 300px (content) + 40px (padding left+right) + 10px (border left+right) = <strong>350px</strong><br>
+            Notice: This box is WIDER than the yellow ruler!
+        </div>
+    </div>
+
+    <div class="ruler">← 300px Ruler →</div>
+
+    <div class="container">
+        <h2>WITH box-sizing: border-box</h2>
+        <div class="border-box">
+            This box has width: 300px, padding: 20px, border: 5px
+        </div>
+        <div class="info">
+            <strong>Actual total width:</strong> 300px<br>
+            The padding and border are included INSIDE the 300px<br>
+            Notice: This box is EXACTLY the same width as the yellow ruler!
+        </div>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <h2>Why This Matters</h2>
+    <p style="max-width: 600px;">
+        When you're building layouts (like 3 columns side-by-side), you need precise control. 
+        If you say "make 3 boxes, each 33% wide" but then add padding, without 
+        <code>box-sizing: border-box</code> they'll overflow and break your layout!
+    </p>
+</body>
+</html>
